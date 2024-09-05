@@ -9,7 +9,7 @@ class Hall(Star_Cinema):
         self.hall_no = hall_no
         self.seats = dict()
         self.show_list: List[Tuple] = list()
-        super().entry_hall(self)
+        super()._entry_hall(self)
 
     def entry_show(self, id: str, movie_name: str, time: str):
         self.show_list.append((id, movie_name, time))
@@ -50,6 +50,23 @@ class Hall(Star_Cinema):
             return f"Given Movie id: {id} is wrong"
         for row in seats:
             print(row)
+
+    # Validator methods
+    def isSeatInHall(self, row: int, col: int):
+        # User input:
+        # 1 based idx
+        if row < 1 or row > self.rows or col < 1 or col > self.cols:
+            return False
+        return True
+
+    def isSeatBooked(self, id: str, row: int, col: int):
+        # User input:
+        # 1 based idx
+        row = row - 1
+        col = col - 1
+        if self.seats[id][row][col] == 1:
+            return True
+        return False
 
     def __repr__(self) -> str:
         return f"This is hall : {self.hall_no}"
