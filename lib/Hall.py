@@ -38,13 +38,18 @@ class Hall(Star_Cinema):
             seats[row][col] = 1
 
     def view_show_list(self):
-        print(self.show_list)
+        print("Show List\n")
+        print("#  id\t\tTime\t\t\tMovie")
+        for i, show in enumerate(self.show_list):
+            id, movie, _time = show
+            print(f"{i+1}) {id}\t{_time}\t{movie}")
 
     def view_available_seats(self, id: str):
         seats = self.seats.get(id, None)
         if seats is None:
             return f"Given Movie id: {id} is wrong"
-        print(seats)
+        for row in seats:
+            print(row)
 
     def __repr__(self) -> str:
         return f"This is hall : {self.hall_no}"
