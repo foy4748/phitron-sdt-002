@@ -13,9 +13,38 @@ class Hall(Star_Cinema):
 
     def entry_show(self, id: str, movie_name: str, time: str):
         self.show_list.append((id, movie_name, time))
-        # Thans to GeeksForGeeks
-        # https://www.geeksforgeeks.org/python-using-2d-arrays-lists-the-right-way/
-        self.seats[id] = [[0] * self.cols] * self.rows
+        # Creating 2D array for seat structure
+        two_d_array = []
+        for _ in range(self.rows):
+            single_row = [0] * self.cols
+            two_d_array.append(single_row)
+        # Attatching the Seat 2D array
+        # To the show id in the seats dict()
+        self.seats[id] = two_d_array
+
+        # ------------------------------------------
+        # Didn't work due to
+        # all the rows are holding
+        # the same reference
+        # self.seats[id] = [[0] * self.cols] * self.rows
+        # ------------------------------------------
+
+    def book_seats(self, id: str, seat_numbers: List[Tuple]):
+        seats = self.seats.get(id, None)
+        if seats is None:
+            return f"Given Movie id: {id} is wrong"
+        for seat_num in seat_numbers:
+            row, col = seat_num
+            seats[row][col] = 1
+
+    def view_show_list(self):
+        print(self.show_list)
+
+    def view_available_seats(self, id: str):
+        seats = self.seats.get(id, None)
+        if seats is None:
+            return f"Given Movie id: {id} is wrong"
+        print(seats)
 
     def __repr__(self) -> str:
         return f"This is hall : {self.hall_no}"
