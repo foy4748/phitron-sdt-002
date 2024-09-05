@@ -68,5 +68,15 @@ class Hall(Star_Cinema):
             return True
         return False
 
+    @staticmethod
+    def isDuplicate(row: int, col: int, seat_numbers: List[Tuple]):
+        for seat in seat_numbers:
+            _row, _col = seat
+            row = row - 1
+            col = col - 1
+            if _row == row and _col == col:
+                return True
+        return False
+
     def __repr__(self) -> str:
         return f"This is hall : {self.hall_no}"
