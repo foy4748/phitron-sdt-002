@@ -1,9 +1,8 @@
 from lib.Hall import Hall
 from lib.Star_Cinema import Star_Cinema
 
-h1 = Hall(6, 6, "001")
-h2 = Hall(6, 6, "002")
-h3 = Hall(6, 6, "003")
+h1 = Hall(6, 6, "Hall-001")
 
+h1.entry_show("Show-001", "Yes Man", "2024-09-05:20:30")
 
-print(Star_Cinema.hall_list)
+print(h1.seats["Show-001"])
