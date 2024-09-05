@@ -1,0 +1,5 @@
+{
+  "jedi.executable.command": "/home/foy4748/.local/share/virtualenvs/DataScience-HsU5juGa/bin/jedi-language-server",
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/home/foy4748/.local/share/virtualenvs/DataScience-HsU5juGa/bin/black"
+}
