@@ -2,8 +2,10 @@ from typing import List, Tuple
 from lib.Star_Cinema import Star_Cinema
 
 
+# == Task 2 ==
 class Hall(Star_Cinema):
     def __init__(self, rows: int, cols: int, hall_no: str) -> None:
+        # == Task 9 ==
         self.__rows = rows
         self.__cols = cols
         self.__hall_no = hall_no
@@ -61,6 +63,23 @@ class Hall(Star_Cinema):
             print(row)
         print(f"\n{self.remaining_seat_count(id)} seats remaining")
 
+    # Getter methods ---------------------
+
+    def get_seats(self, id: str):
+        return self.__seats.get(id, None)
+
+    def get_show_id(self, idx: int):
+        try:
+            return self.__show_list[idx][0]
+        except:
+            return None
+
+    def show_count(self):
+        return len(self.__show_list)
+
+    def remaining_seat_count(self, id: str):
+        return self.__remaining_seats_number.get(id, None)
+
     # Validator methods ------------------
 
     def isSeatInHall(self, row: int, col: int):
@@ -79,24 +98,7 @@ class Hall(Star_Cinema):
             return True
         return False
 
-    # Getter methods ----------------------
-
-    def get_seats(self, id: str):
-        return self.__seats.get(id, None)
-
-    def get_show_id(self, idx: int):
-        try:
-            return self.__show_list[idx][0]
-        except:
-            return None
-
-    def show_count(self):
-        return len(self.__show_list)
-
-    def remaining_seat_count(self, id: str):
-        return self.__remaining_seats_number.get(id, None)
-
-    # Static Methods
+    # Static Methods ---------------------
 
     @staticmethod
     def isDuplicate(row: int, col: int, seat_numbers: List[Tuple]):
@@ -111,5 +113,6 @@ class Hall(Star_Cinema):
                 return True
         return False
 
+    # -----------------------------------
     def __repr__(self) -> str:
         return f"This is hall : {self.__hall_no}"

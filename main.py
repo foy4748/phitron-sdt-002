@@ -4,6 +4,9 @@ h1 = Hall(6, 6, "Hall-001")
 h1.entry_show("S-001", "Yes Man", "2024-09-05:20:30")
 h1.entry_show("S-002", "Full Metal Jacket", "2024-09-12:20:30")
 
+
+# == Task 7 ==
+
 keepRunning = True
 rememberLast = False
 option = -1
@@ -66,6 +69,8 @@ while keepRunning:
                 continue
             print("\nShowing available seats. (Marked as 0)")
             h1.view_available_seats(id)
+
+        # == Task 8 ==
         case 3:
             # Selecting Show
             if rememberLast is False:
