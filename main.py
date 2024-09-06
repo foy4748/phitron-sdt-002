@@ -51,24 +51,26 @@ while keepRunning:
             # Booking Seats
             i = 1
             while num_of_seats:
-                row = int(input(f"For Seat {i} Input Row no: "))
-                col = int(input(f"For Seat {i} Input Col no: "))
-
-                isDuplicate = Hall.isDuplicate(row, col, require_seats)
-
-                # Calling validators
-                if isDuplicate:
-                    print(f"Row {row} and Col {col} is already entered")
-                    continue
-                if h1.isSeatInHall(row, col) is False:
-                    print(f"Row {row} and Col {col} is not within the hall")
-                    continue
-                if h1.isSeatBooked(id, row, col) is True:
-                    print(f"Row {row} and Col {col} is already booked")
+                row = -1
+                col = -1
+                try:
+                    row = int(input(f"For Seat {i} Input Row no: "))
+                    col = int(input(f"For Seat {i} Input Col no: "))
+                except:
+                    print("Enter valid input, Please")
                     continue
 
                 tup = (row - 1, col - 1)
                 require_seats.append(tup)
+
+                if h1.isSeatInHall(row, col) is False:
+                    require_seats.pop()
+                    print(f"Row {row} and Col {col} is not within the hall")
+                    continue
+                if h1.isSeatBooked(id, row, col) is True:
+                    require_seats.pop()
+                    print(f"Row {row} and Col {col} is already booked")
+                    continue
 
                 # Increamenting seat input prompt index
                 i = i + 1
