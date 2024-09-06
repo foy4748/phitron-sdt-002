@@ -34,7 +34,7 @@ while keepRunning:
             if seats is None:
                 print(f"There is no show for id {id}")
                 continue
-            print("Showing available seats. (Marked as 0)")
+            print("\nShowing available seats. (Marked as 0)")
             h1.view_available_seats(id)
         case 3:
             # Selecting Show
@@ -54,23 +54,30 @@ while keepRunning:
                 row = -1
                 col = -1
                 try:
-                    row = int(input(f"For Seat {i} Input Row no: "))
+                    row = int(input(f"\nFor Seat {i} Input Row no: "))
                     col = int(input(f"For Seat {i} Input Col no: "))
                 except:
-                    print("Enter valid input, Please")
+                    print("\nEnter valid input, Please")
                     continue
 
-                tup = (row - 1, col - 1)
-                require_seats.append(tup)
+                # Duplicate entry validation
+                isDuplicated = Hall.isDuplicate(row, col, require_seats)
+
+                if isDuplicated is True:
+                    print(f"\nRow {row} and Col {col} is already Entered")
+                    continue
 
                 if h1.isSeatInHall(row, col) is False:
-                    require_seats.pop()
-                    print(f"Row {row} and Col {col} is not within the hall")
+                    print(f"\nRow {row} and Col {col} is not within the hall")
                     continue
                 if h1.isSeatBooked(id, row, col) is True:
-                    require_seats.pop()
-                    print(f"Row {row} and Col {col} is already booked")
+                    print(f"\nRow {row} and Col {col} is already booked")
                     continue
+
+                # Doing validation before allowing
+                # append new seat
+                tup = (row - 1, col - 1)
+                require_seats.append(tup)
 
                 # Increamenting seat input prompt index
                 i = i + 1

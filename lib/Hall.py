@@ -70,15 +70,16 @@ class Hall(Star_Cinema):
 
     @staticmethod
     def isDuplicate(row: int, col: int, seat_numbers: List[Tuple]):
-        isFound = False
+        # User input:
+        # 1 based idx
+        row = row - 1
+        col = col - 1
         for item in seat_numbers:
             row_ = item[0]
             col_ = item[1]
             if row == row_ and col == col_:
-                print("HIT")
-                isFound = True
-                break
-        return isFound
+                return True
+        return False
 
     def __repr__(self) -> str:
         return f"This is hall : {self.hall_no}"
