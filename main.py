@@ -87,7 +87,30 @@ while keepRunning:
             # -------------------
 
             h1.view_available_seats(id)
-            num_of_seats = int(input("\nEnter number of tickets needed: "))
+            num_of_seats = 0
+
+            try:
+                num_of_seats = int(input("\nEnter number of tickets needed: "))
+            except:
+                print("\nEnter a valid number of seats")
+                rememberLast = True
+                continue
+
+            # Checking whether given number of
+            # seats available or not
+            remaining_seat_count = h1.remaining_seat_count(id)
+
+            if remaining_seat_count is None:
+                print("\n Invalid Show.")
+                rememberLast = True
+                continue
+
+            if num_of_seats > remaining_seat_count:
+                print(f"\n{num_of_seats} seats are not available right now.")
+                print(f"\n{remaining_seat_count} seats remaining")
+                rememberLast = True
+                continue
+
             require_seats = []
 
             # Booking Seats

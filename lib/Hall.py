@@ -8,6 +8,7 @@ class Hall(Star_Cinema):
         self.cols = cols
         self.hall_no = hall_no
         self.seats = dict()
+        self.remaining_seats_number = dict()
         self.show_list: List[Tuple] = list()
         super()._entry_hall(self)
 
@@ -21,7 +22,7 @@ class Hall(Star_Cinema):
         # Attatching the Seat 2D array
         # To the show id in the seats dict()
         self.seats[id] = two_d_array
-
+        self.remaining_seats_number[id] = self.rows * self.cols
         # ------------------------------------------
         # Didn't work due to
         # all the rows are holding
@@ -36,6 +37,10 @@ class Hall(Star_Cinema):
         for seat_num in seat_numbers:
             row, col = seat_num
             seats[row][col] = 1
+        # Reducing remaining seat number
+        self.remaining_seats_number[id] = self.remaining_seats_number[id] - len(
+            seat_numbers
+        )
 
     def view_show_list(self):
         print("Show List\n")
@@ -47,12 +52,17 @@ class Hall(Star_Cinema):
     def show_count(self):
         return len(self.show_list)
 
+    def remaining_seat_count(self, id: str):
+        remaining_seats = self.remaining_seats_number.get(id, None)
+        return remaining_seats
+
     def view_available_seats(self, id: str):
         seats = self.seats.get(id, None)
         if seats is None:
             return f"Given Movie id: {id} is wrong"
         for row in seats:
             print(row)
+        print(f"\n{self.remaining_seat_count(id)} seats remaining")
 
     # Validator methods
     def isSeatInHall(self, row: int, col: int):
