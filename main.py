@@ -29,18 +29,26 @@ while keepRunning:
             rememberLast = False
             h1.view_show_list()
         case 2:
-            rememberLast = False
             # Selecting Show
-            h1.view_show_list()
+            if rememberLast is False:
+                h1.view_show_list()
+
+            rememberLast = False
+
             show_number = -1
+            show_count = h1.show_count()
             try:
                 show_number = int(input("\nEnter show number: "))
             except:
-                show_count = h1.show_count()
                 if show_count == 1:
-                    print("\nThere is only one show. Please, Enter 1")
+                    print("There is only one show. Please, Enter 1")
                 else:
-                    print(f"\nEnter between 1 to {show_count}")
+                    print(f"Enter between 1 and {show_count}")
+                rememberLast = True
+            if show_number < 1 or show_number > show_count:
+                print(f"Enter between 1 and {show_count}")
+                rememberLast = True
+                continue
 
             print()
             id = h1.show_list[show_number - 1][0]
@@ -68,7 +76,8 @@ while keepRunning:
                     print("There is only one show. Please, Enter 1")
                 else:
                     print(f"Enter between 1 and {show_count}")
-            if show_number < show_count or show_number > show_count:
+                rememberLast = True
+            if show_number < 1 or show_number > show_count:
                 print(f"Enter between 1 and {show_count}")
                 rememberLast = True
                 continue
