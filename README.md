@@ -1,5 +1,10 @@
 # Instructions
 
+## Course Credentials
+
+- Name  : AB. MD. FAISAL RAHMAN
+- Email : faisal.rahman.4748.ph@gmail.com
+
 ## Necessary Links
 - Requirements : [Google Doc](https://docs.google.com/document/d/1YlLMdOYCEjYqoXmxNPrmW_47c8GqoqjNtV8fGj-FlPw)
 - GiHub Link : [GitHub](https://github.com/foy4748/phitron-sdt-002)
