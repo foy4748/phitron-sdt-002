@@ -44,6 +44,9 @@ class Hall(Star_Cinema):
             id, movie, _time = show
             print(f"{i+1}) {id}\t{_time}\t{movie}")
 
+    def show_count(self):
+        return len(self.show_list)
+
     def view_available_seats(self, id: str):
         seats = self.seats.get(id, None)
         if seats is None:

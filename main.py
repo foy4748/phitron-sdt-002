@@ -5,27 +5,43 @@ h1.entry_show("S-001", "Yes Man", "2024-09-05:20:30")
 h1.entry_show("S-002", "Full Metal Jacket", "2024-09-12:20:30")
 
 keepRunning = True
+rememberLast = False
+option = -1
 
 while keepRunning:
-    print(
-        """
-    ----------------
-    1. VIEW ALL SHOW TODAY
-    2. VIEW AVAILABLE SEATS
-    3. BOOK TICKET
-    4. EXIT
-    ----------------
+
+    if rememberLast is False:
+        print(
             """
-    )
-    option = int(input())
+        ----------------
+        1. VIEW ALL SHOW TODAY
+        2. VIEW AVAILABLE SEATS
+        3. BOOK TICKET
+        4. EXIT
+        ----------------
+                """
+        )
+        option = int(input())
     print("----------------")
+
     match option:
         case 1:
+            rememberLast = False
             h1.view_show_list()
         case 2:
+            rememberLast = False
             # Selecting Show
             h1.view_show_list()
-            show_number = int(input("\nEnter show number: "))
+            show_number = -1
+            try:
+                show_number = int(input("\nEnter show number: "))
+            except:
+                show_count = h1.show_count()
+                if show_count == 1:
+                    print("\nThere is only one show. Please, Enter 1")
+                else:
+                    print(f"\nEnter between 1 to {show_count}")
+
             print()
             id = h1.show_list[show_number - 1][0]
             # -------------------
@@ -38,8 +54,25 @@ while keepRunning:
             h1.view_available_seats(id)
         case 3:
             # Selecting Show
-            h1.view_show_list()
-            show_number = int(input("\nEnter show number: "))
+            if rememberLast is False:
+                h1.view_show_list()
+
+            rememberLast = False
+
+            show_number = -1
+            show_count = h1.show_count()
+            try:
+                show_number = int(input("\nEnter show number: "))
+            except:
+                if show_count == 1:
+                    print("There is only one show. Please, Enter 1")
+                else:
+                    print(f"Enter between 1 and {show_count}")
+            if show_number < show_count or show_number > show_count:
+                print(f"Enter between 1 and {show_count}")
+                rememberLast = True
+                continue
+
             print()
             id = h1.show_list[show_number - 1][0]
             # -------------------
@@ -87,6 +120,8 @@ while keepRunning:
             h1.book_seats(id, require_seats)
 
         case 4:
+            rememberLast = False
             print("Exiting...")
             keepRunning = False
+
     print("----------------")
