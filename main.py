@@ -51,10 +51,16 @@ while keepRunning:
                 continue
 
             print()
-            id = h1.show_list[show_number - 1][0]
+
+            id = h1.get_show_id(show_number - 1)
             # -------------------
 
-            seats = h1.seats.get(id, None)
+            if id is None:
+                print("\nInvalid show number")
+                rememberLast = True
+                continue
+
+            seats = h1.get_seats(id)
             if seats is None:
                 print(f"There is no show for id {id}")
                 continue
@@ -83,8 +89,13 @@ while keepRunning:
                 continue
 
             print()
-            id = h1.show_list[show_number - 1][0]
+            id = h1.get_show_id(show_number - 1)
             # -------------------
+
+            if id is None:
+                print("\nInvalid show number")
+                rememberLast = True
+                continue
 
             h1.view_available_seats(id)
             num_of_seats = 0
