@@ -24,33 +24,24 @@ while keepRunning:
         ----------------
                 """
         )
-        option = int(input())
+        try:
+            option = int(input())
+        except:
+            print("Enter integers only")
     print("----------------")
 
     match option:
         case 1:
             rememberLast = False
             h1.view_show_list()
+
         case 2:
-            # Selecting Show
-            if rememberLast is False:
-                h1.view_show_list()
+            session_and_show_number = h1.map_idx_to_movie_id_safely(rememberLast)
 
-            rememberLast = False
+            rememberLast = session_and_show_number["rememberLast"]
+            show_number = session_and_show_number["show_number"]
 
-            show_number = -1
-            show_count = h1.show_count()
-            try:
-                show_number = int(input("\nEnter show number: "))
-            except:
-                if show_count == 1:
-                    print("There is only one show. Please, Enter 1")
-                else:
-                    print(f"Enter between 1 and {show_count}")
-                rememberLast = True
-            if show_number < 1 or show_number > show_count:
-                print(f"Enter between 1 and {show_count}")
-                rememberLast = True
+            if rememberLast or show_number < 0:
                 continue
 
             print()
@@ -64,36 +55,27 @@ while keepRunning:
                 continue
 
             seats = h1.get_seats(id)
+
             if seats is None:
                 print(f"There is no show for id {id}")
                 continue
+
             print("\nShowing available seats. (Marked as 0)")
             h1.view_available_seats(id)
 
         # == Task 8 ==
         case 3:
-            # Selecting Show
-            if rememberLast is False:
-                h1.view_show_list()
 
-            rememberLast = False
+            session_and_show_number = h1.map_idx_to_movie_id_safely(rememberLast)
 
-            show_number = -1
-            show_count = h1.show_count()
-            try:
-                show_number = int(input("\nEnter show number: "))
-            except:
-                if show_count == 1:
-                    print("There is only one show. Please, Enter 1")
-                else:
-                    print(f"Enter between 1 and {show_count}")
-                rememberLast = True
-            if show_number < 1 or show_number > show_count:
-                print(f"Enter between 1 and {show_count}")
-                rememberLast = True
+            rememberLast = session_and_show_number["rememberLast"]
+            show_number = session_and_show_number["show_number"]
+
+            if rememberLast or show_number < 0:
                 continue
 
             print()
+
             id = h1.get_show_id(show_number - 1)
             # -------------------
 

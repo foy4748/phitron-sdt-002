@@ -80,6 +80,32 @@ class Hall(Star_Cinema):
     def remaining_seat_count(self, id: str):
         return self.__remaining_seats_number.get(id, None)
 
+    def map_idx_to_movie_id_safely(self, rememberLast):
+        # Selecting Show
+        if rememberLast is False:
+            self.view_show_list()
+
+        rememberLast = False
+
+        show_number = -1
+        show_count = self.show_count()
+        try:
+            show_number = int(input("\nEnter show number: "))
+        except:
+            if show_count == 1:
+                print("There is only one show. Please, Enter 1")
+            else:
+                print(f"Enter between 1 and {show_count}")
+            # rememberLast = True
+            return {"rememberLast": True, "show_number": -1}
+
+        if show_number < 1 or show_number > show_count:
+            print(f"Enter between 1 and {show_count}")
+            # rememberLast = True
+            # continue
+            return {"rememberLast": True, "show_number": -1}
+        return {"rememberLast": rememberLast, "show_number": show_number}
+
     # Validator methods ------------------
 
     def isSeatInHall(self, row: int, col: int):
